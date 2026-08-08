@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aina Hannah — Senior Accountant &amp; Financial Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#080D18;
+    --panel:#0F1830;
+    --panel-2:#111C38;
+    --line:#1E2C4E;
+    --line-soft:#152140;
+    --text:#E8EDF6;
+    --text-muted:#8CA0C4;
+    --text-dim:#5A6B8C;
+    --gold:#D4AF6A;
+    --teal:#4FD8C4;
+    --red-debit:#E8896A;
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'IBM Plex Sans', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.6;
+    overflow-x:hidden;
+    background-image:
+      repeating-linear-gradient(to bottom, transparent, transparent 79px, var(--line-soft) 79px, var(--line-soft) 80px);
+  }
+
+  ::selection{background:var(--gold);color:var(--bg);}
+
+  a{color:inherit;text-decoration:none;}
+
+  .mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums;}
+
+  .wrap{max-width:1100px;margin:0 auto;padding:0 32px;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(8,13,24,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1100px;margin:0 auto;padding:18px 32px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .nav-mark{
+    font-family:var(--font-mono);font-size:14px;letter-spacing:0.08em;
+    color:var(--gold);border:1px solid var(--line);padding:6px 10px;
+  }
+  .nav-links{display:flex;gap:28px;list-style:none;}
+  .nav-links a{
+    font-family:var(--font-mono);font-size:12px;letter-spacing:0.1em;
+    color:var(--text-muted);text-transform:uppercase;transition:color .2s;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible{color:var(--teal);}
+  .nav-links a:focus-visible{outline:1px solid var(--teal);outline-offset:4px;}
+  @media (max-width:720px){.nav-links{display:none;}}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex;flex-direction:column;justify-content:center;
+    padding-top:96px;padding-bottom:64px;
+    position:relative;
+  }
+  .hero-grid{
+    position:absolute;inset:0;z-index:0;pointer-events:none;
+    background-image: linear-gradient(var(--line-soft) 1px, transparent 1px), linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size:64px 64px;
+    -webkit-mask-image:radial-gradient(ellipse 60% 60% at 50% 30%, black, transparent);
+    mask-image:radial-gradient(ellipse 60% 60% at 50% 30%, black, transparent);
+    opacity:0.6;
+  }
+  .hero-content{position:relative;z-index:1;}
+  .eyebrow{
+    font-family:var(--font-mono);font-size:13px;letter-spacing:0.18em;
+    color:var(--teal);text-transform:uppercase;margin-bottom:20px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:'';width:24px;height:1px;background:var(--teal);}
+  h1{
+    font-family:var(--font-display);font-weight:700;
+    font-size:clamp(48px,9vw,104px);line-height:0.98;letter-spacing:-0.02em;
+    margin-bottom:24px;
+  }
+  .hero-role{
+    font-family:var(--font-display);font-size:clamp(18px,2.4vw,24px);
+    color:var(--text-muted);font-weight:500;margin-bottom:28px;
+  }
+  .hero-summary{
+    max-width:640px;color:var(--text-muted);font-size:16.5px;margin-bottom:36px;
+  }
+  .contact-row{
+    display:flex;flex-wrap:wrap;gap:14px;margin-bottom:64px;
+  }
+  .contact-chip{
+    font-family:var(--font-mono);font-size:13px;
+    border:1px solid var(--line);padding:9px 14px;
+    color:var(--text-muted);transition:all .2s;
+    display:flex;align-items:center;gap:8px;
+  }
+  .contact-chip:hover, .contact-chip:focus-visible{
+    color:var(--gold);border-color:var(--gold);
+    outline:none;
+  }
+  .contact-chip:focus-visible{outline:1px solid var(--gold);outline-offset:2px;}
+
+  /* ---------- LEDGER SIGNATURE ---------- */
+  .ledger-card{
+    border:1px solid var(--line);
+    background:linear-gradient(180deg, var(--panel), var(--bg));
+    position:relative;z-index:1;
+  }
+  .ledger-head{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:16px 24px;border-bottom:1px solid var(--line);
+    font-family:var(--font-mono);font-size:12px;letter-spacing:0.1em;
+    color:var(--text-dim);text-transform:uppercase;
+  }
+  .ledger-status{
+    color:var(--text-dim);transition:color .6s ease;
+  }
+  .ledger-status.balanced{color:var(--teal);}
+  .ledger-body{
+    display:grid;grid-template-columns:1fr 1px 1fr;
+  }
+  .ledger-col{padding:28px 24px;}
+  .ledger-col-head{
+    font-family:var(--font-mono);font-size:12px;letter-spacing:0.12em;
+    text-transform:uppercase;margin-bottom:18px;color:var(--text-dim);
+  }
+  .ledger-col.debit .ledger-col-head{color:var(--red-debit);}
+  .ledger-col.credit .ledger-col-head{color:var(--teal);}
+  .ledger-divider{background:var(--line);}
+  .ledger-row{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding:10px 0;border-bottom:1px dashed var(--line);
+    opacity:0;transform:translateY(8px);
+    transition:opacity .5s ease, transform .5s ease;
+  }
+  .ledger-row.show{opacity:1;transform:translateY(0);}
+  .ledger-row:last-child{border-bottom:none;}
+  .ledger-row-label{font-size:14px;color:var(--text-muted);}
+  .ledger-row-value{font-family:var(--font-mono);font-size:15px;font-weight:500;}
+  .ledger-foot{
+    padding:16px 24px;border-top:1px solid var(--line);
+    text-align:center;font-family:var(--font-mono);font-size:12px;
+    letter-spacing:0.15em;color:var(--text-dim);
+  }
+  @media (max-width:640px){
+    .ledger-body{grid-template-columns:1fr;}
+    .ledger-divider{display:none;}
+    .ledger-col.credit{border-top:1px solid var(--line);}
+  }
+
+  /* ---------- SECTIONS GENERAL ---------- */
+  section{padding:100px 0;position:relative;border-top:1px solid var(--line);}
+  .section-head{
+    display:flex;align-items:baseline;gap:16px;margin-bottom:48px;
+  }
+  .section-tag{
+    font-family:var(--font-mono);font-size:12px;color:var(--gold);
+    letter-spacing:0.15em;text-transform:uppercase;
+    border:1px solid var(--line);padding:4px 10px;
+  }
+  .section-title{
+    font-family:var(--font-display);font-size:clamp(28px,4vw,40px);
+    font-weight:600;letter-spacing:-0.01em;
+  }
+
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.show{opacity:1;transform:translateY(0);}
+
+  /* ---------- METRICS TABLE ---------- */
+  .metrics-table{width:100%;border-collapse:collapse;}
+  .metrics-table tr{border-bottom:1px solid var(--line);}
+  .metrics-table tr:first-child{border-top:1px solid var(--line);}
+  .metrics-table td{padding:20px 8px;}
+  .metrics-table .m-val{
+    font-family:var(--font-mono);font-size:clamp(22px,3vw,32px);
+    color:var(--gold);width:180px;font-weight:500;
+  }
+  .metrics-table .m-label{color:var(--text-muted);font-size:15px;}
+  .metrics-table .m-ref{
+    font-family:var(--font-mono);font-size:12px;color:var(--text-dim);text-align:right;
+  }
+
+  /* ---------- SUMMARY ---------- */
+  .summary-text{
+    max-width:760px;font-size:17px;color:var(--text-muted);
+  }
+  .summary-text strong{color:var(--text);font-weight:600;}
+
+  /* ---------- EXPERTISE ---------- */
+  .expertise-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;
+    background:var(--line);border:1px solid var(--line);
+  }
+  .expertise-cat{background:var(--bg);padding:26px 22px;}
+  .expertise-cat h3{
+    font-family:var(--font-mono);font-size:12px;letter-spacing:0.1em;
+    text-transform:uppercase;color:var(--teal);margin-bottom:16px;
+  }
+  .expertise-cat ul{list-style:none;}
+  .expertise-cat li{
+    font-size:14.5px;color:var(--text-muted);padding:6px 0;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .expertise-cat li:last-child{border-bottom:none;}
+
+  /* ---------- EXPERIENCE ---------- */
+  .timeline{position:relative;}
+  .timeline::before{
+    content:'';position:absolute;left:110px;top:8px;bottom:8px;width:1px;background:var(--line);
+  }
+  .job{display:grid;grid-template-columns:110px 1fr;gap:0 24px;margin-bottom:56px;position:relative;}
+  .job:last-child{margin-bottom:0;}
+  .job-date{
+    font-family:var(--font-mono);font-size:12.5px;color:var(--text-dim);
+    padding-top:4px;text-align:right;padding-right:24px;
+  }
+  .job-dot{
+    position:absolute;left:106px;top:8px;width:9px;height:9px;border-radius:50%;
+    background:var(--gold);border:2px solid var(--bg);
+  }
+  .job-title{font-family:var(--font-display);font-size:20px;font-weight:600;margin-bottom:2px;}
+  .job-company{color:var(--text-muted);font-size:14.5px;margin-bottom:14px;}
+  .job-company .loc{color:var(--text-dim);}
+  .job ul{list-style:none;}
+  .job li{
+    position:relative;padding-left:18px;margin-bottom:8px;font-size:14.5px;color:var(--text-muted);
+  }
+  .job li::before{
+    content:'—';position:absolute;left:0;color:var(--text-dim);
+  }
+  @media (max-width:640px){
+    .timeline::before{left:0;display:none;}
+    .job{grid-template-columns:1fr;}
+    .job-date{text-align:left;padding-right:0;margin-bottom:8px;}
+    .job-dot{display:none;}
+  }
+
+  /* ---------- EDUCATION ---------- */
+  .edu-list{border-top:1px solid var(--line);}
+  .edu-item{
+    display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
+    padding:20px 0;border-bottom:1px solid var(--line);
+  }
+  .edu-degree{font-family:var(--font-display);font-size:17px;font-weight:600;}
+  .edu-school{color:var(--text-muted);font-size:14px;margin-top:2px;}
+  .edu-note{
+    margin-top:20px;font-size:13.5px;color:var(--text-dim);font-family:var(--font-mono);
+    padding-top:16px;
+  }
+
+  /* ---------- CREDENTIALS TABS ---------- */
+  .tabs{display:flex;gap:8px;margin-bottom:32px;}
+  .tab-btn{
+    font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.08em;text-transform:uppercase;
+    padding:10px 18px;border:1px solid var(--line);background:transparent;color:var(--text-muted);
+    cursor:pointer;transition:all .2s;
+  }
+  .tab-btn.active{border-color:var(--gold);color:var(--gold);}
+  .tab-btn:focus-visible{outline:1px solid var(--teal);outline-offset:2px;}
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block;}
+  .cred-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 40px;}
+  .cred-item{
+    display:flex;justify-content:space-between;gap:16px;
+    padding:14px 0;border-bottom:1px solid var(--line-soft);font-size:14.5px;
+  }
+  .cred-name{color:var(--text);}
+  .cred-date{font-family:var(--font-mono);font-size:12.5px;color:var(--text-dim);white-space:nowrap;}
+  @media (max-width:720px){.cred-grid{grid-template-columns:1fr;}}
+
+  /* ---------- PUBLICATION / LANGUAGES ---------- */
+  .two-col{display:grid;grid-template-columns:2fr 1fr;gap:48px;}
+  .pub-box{
+    border-left:2px solid var(--gold);padding-left:20px;
+  }
+  .pub-cite{font-size:14.5px;color:var(--text-muted);font-style:italic;}
+  .lang-box .lang-row{
+    display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);
+    font-family:var(--font-mono);font-size:14px;
+  }
+  @media (max-width:720px){.two-col{grid-template-columns:1fr;}}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:80px 0 40px;text-align:center;border-top:1px solid var(--line);
+  }
+  .footer-cta{
+    font-family:var(--font-display);font-size:clamp(28px,5vw,48px);font-weight:600;
+    margin-bottom:28px;
+  }
+  .footer-links{
+    display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:48px;
+  }
+  .footer-fine{
+    font-family:var(--font-mono);font-size:12px;color:var(--text-dim);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-mark">AH</div>
+    <ul class="nav-links">
+      <li><a href="#summary">Summary</a></li>
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#credentials">Credentials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-grid"></div>
+  <div class="wrap hero-content">
+    <div class="eyebrow">Taber, Alberta, Canada</div>
+    <h1>Aina<br>Hannah</h1>
+    <div class="hero-role">Senior Accountant / Financial Analyst</div>
+    <p class="hero-summary">Fifteen-plus years closing books, reconciling ledgers, and keeping regulators satisfied — from full-cycle accounting and SEC reporting to cross-border payroll and treasury operations.</p>
+
+    <div class="contact-row">
+      <a class="contact-chip" href="mailto:tokiaina@yahoo.com">tokiaina@yahoo.com</a>
+      <a class="contact-chip" href="tel:+14033937779">+1 403 393 7779</a>
+      <span class="contact-chip">Taber, Canada</span>
+      <a class="contact-chip" href="https://www.linkedin.com/in/hannah-aina-23344974/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+
+    <div class="ledger-card reveal" id="ledger-card">
+      <div class="ledger-head">
+        <span>T-Account — Career Ledger</span>
+        <span class="ledger-status" id="ledger-status">reconciling…</span>
+      </div>
+      <div class="ledger-body">
+        <div class="ledger-col debit">
+          <div class="ledger-col-head">Debit — Input</div>
+          <div class="ledger-row"><span class="ledger-row-label">Years in accounting &amp; finance</span><span class="ledger-row-value mono">15+</span></div>
+          <div class="ledger-row"><span class="ledger-row-label">Annual ledger volume managed</span><span class="ledger-row-value mono">₦3.5B+</span></div>
+          <div class="ledger-row"><span class="ledger-row-label">Invoices processed monthly</span><span class="ledger-row-value mono">200+</span></div>
+          <div class="ledger-row"><span class="ledger-row-label">Staff trained across departments</span><span class="ledger-row-value mono">50+</span></div>
+        </div>
+        <div class="ledger-divider"></div>
+        <div class="ledger-col credit">
+          <div class="ledger-col-head">Credit — Result</div>
+          <div class="ledger-row"><span class="ledger-row-label">Regulatory reporting compliance</span><span class="ledger-row-value mono">100%</span></div>
+          <div class="ledger-row"><span class="ledger-row-label">Reduction in record discrepancies</span><span class="ledger-row-value mono">90%</span></div>
+          <div class="ledger-row"><span class="ledger-row-label">Saved through improved reporting</span><span class="ledger-row-value mono">$20M+</span></div>
+          <div class="ledger-row"><span class="ledger-row-label">Gain in internal efficiency</span><span class="ledger-row-value mono">30%</span></div>
+        </div>
+      </div>
+      <div class="ledger-foot">DEBITS = CREDITS</div>
+    </div>
+  </div>
+</header>
+
+<section id="summary">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">Ref. Summary</span>
+      <h2 class="section-title reveal">Professional Summary</h2>
+    </div>
+    <p class="summary-text reveal">Accomplished accounting professional with over <strong>15 years of experience</strong> in financial management, financial reporting, treasury operations, payroll administration, compliance, and business process improvement. Proven expertise in managing full-cycle accounting functions, preparing management and regulatory reports, supporting audits, administering payroll across Canada and the United States, and maintaining strong internal controls. Adept at analyzing financial data, improving operational efficiencies, and partnering with management to support strategic business objectives. Proficient in <strong>QuickBooks Desktop and Online</strong>, advanced Excel, financial analysis, and regulatory compliance — with a reputation for accuracy, integrity, and delivering results in dynamic business environments.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">Ref. Totals</span>
+      <h2 class="section-title reveal">By the Numbers</h2>
+    </div>
+    <table class="metrics-table reveal">
+      <tbody>
+        <tr><td class="m-val mono">₦20M</td><td class="m-label">Saved annually through streamlined monthly reconciliation and reporting</td><td class="m-ref">NICON · 2016–2020</td></tr>
+        <tr><td class="m-val mono">99.9%</td><td class="m-label">Accuracy rate maintained across financial records via rigorous verification</td><td class="m-ref">NICON · 2016–2020</td></tr>
+        <tr><td class="m-val mono">₦21M</td><td class="m-label">Combined savings from a custom payroll package and reduced tax liability</td><td class="m-ref">NICON · 2006–2015</td></tr>
+        <tr><td class="m-val mono">60 hrs</td><td class="m-label">Monthly preparation time cut by automating Workers' Compensation accruals</td><td class="m-ref">NICON · 2006–2015</td></tr>
+        <tr><td class="m-val mono">30%</td><td class="m-label">Increase in internal efficiency from new cross-department policy and systems</td><td class="m-ref">NICON · 2020–2024</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="expertise">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">Ref. Skills</span>
+      <h2 class="section-title reveal">Areas of Expertise</h2>
+    </div>
+    <div class="expertise-grid reveal">
+      <div class="expertise-cat">
+        <h3>Reporting &amp; Compliance</h3>
+        <ul>
+          <li>Financial Reporting &amp; Analysis</li>
+          <li>Financial Statement Preparation</li>
+          <li>SEC Reporting (10-Q &amp; 10-K)</li>
+          <li>Audit Support &amp; Compliance</li>
+          <li>Tax Compliance &amp; Filing</li>
+          <li>Internal Controls</li>
+        </ul>
+      </div>
+      <div class="expertise-cat">
+        <h3>Treasury &amp; Operations</h3>
+        <ul>
+          <li>Treasury &amp; Cash Management</li>
+          <li>Payroll &amp; Benefits Admin. (Canada &amp; U.S.)</li>
+          <li>401(k) Administration &amp; Compliance</li>
+          <li>Accounts Payable &amp; Receivable</li>
+          <li>Bank &amp; General Ledger Reconciliations</li>
+          <li>Inventory Accounting &amp; Valuation</li>
+          <li>Intercompany Accounting</li>
+        </ul>
+      </div>
+      <div class="expertise-cat">
+        <h3>Strategy &amp; Systems</h3>
+        <ul>
+          <li>Borrowing Base Certificate (BBC) Prep.</li>
+          <li>Budgeting &amp; Forecasting</li>
+          <li>Financial Systems Management</li>
+          <li>Advanced Microsoft Excel</li>
+          <li>Process Improvement</li>
+          <li>Risk Management</li>
+          <li>QuickBooks Desktop &amp; Online</li>
+        </ul>
+      </div>
+      <div class="expertise-cat">
+        <h3>Leadership &amp; Advisory</h3>
+        <ul>
+          <li>Team Leadership</li>
+          <li>Cross-Functional Collaboration</li>
+          <li>Life Insurance Advisory</li>
+          <li>Financial Products &amp; Insurance Solutions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">Ref. History</span>
+      <h2 class="section-title reveal">Professional Experience</h2>
+    </div>
+    <div class="timeline">
+
+      <div class="job reveal">
+        <div class="job-date mono">Feb 2025 —<br>Present</div>
+        <div class="job-dot"></div>
+        <div>
+          <div class="job-title">Accountant</div>
+          <div class="job-company">Taber, Alberta, Canada</div>
+          <ul>
+            <li>Prepare monthly Borrowing Base Certificates (BBC) for financial institutions under line-of-credit reporting requirements.</li>
+            <li>Support preparation and review of quarterly Form 10-Q and annual Form 10-K regulatory filings.</li>
+            <li>Manage full-cycle Accounts Payable and monitor Accounts Receivable, including aging analysis and collections.</li>
+            <li>Process bi-weekly and monthly payroll across Canada and the U.S., including 401(k) reporting and compliance.</li>
+            <li>Perform bank and GL reconciliations and coordinate external audits, including Chubb audits.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job reveal">
+        <div class="job-date mono">Jan 2025 —<br>Feb 2025</div>
+        <div class="job-dot"></div>
+        <div>
+          <div class="job-title">Caregiver, Private Client</div>
+          <div class="job-company">Lethbridge, Alberta, Canada</div>
+          <ul>
+            <li>Provided full personal and medical care for a private client between accounting engagements.</li>
+            <li>Managed household operations, transportation, and detailed care recordkeeping.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job reveal">
+        <div class="job-date mono">Dec 2020 —<br>Apr 2024</div>
+        <div class="job-dot"></div>
+        <div>
+          <div class="job-title">Asst. General Manager, Finance &amp; Admin / Head of Accounts</div>
+          <div class="job-company">NICON Insurance Limited <span class="loc">— Abuja, Nigeria</span></div>
+          <ul>
+            <li>Partnered with 10 department managers to implement policy and systems that lifted internal efficiency by 30%.</li>
+            <li>Eliminated recurring regulatory fines, saving ₦5M annually through 100% on-time compliance reporting.</li>
+            <li>Managed journals and general ledgers covering more than ₦3.5B in annual transactions.</li>
+            <li>Reconciled monthly financial statements, saving ₦20M annually through improved reporting accuracy.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job reveal">
+        <div class="job-date mono">Jan 2016 —<br>Nov 2020</div>
+        <div class="job-dot"></div>
+        <div>
+          <div class="job-title">Manager, Final &amp; Technical Accounts / Head of Accounts</div>
+          <div class="job-company">NICON Insurance Limited <span class="loc">— Abuja, Nigeria</span></div>
+          <ul>
+            <li>Issued and processed 200+ invoices monthly with a 98% on-time collection rate.</li>
+            <li>Reduced overpayments 25% by auditing invoice processing for three-step compliance.</li>
+            <li>Directed the annual budgeting process across 10 departments and 7 regions.</li>
+            <li>Maintained a 99.9% accuracy rate in financial records, cutting discrepancies by 90%.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job reveal">
+        <div class="job-date mono">Nov 2006 —<br>Dec 2015</div>
+        <div class="job-dot"></div>
+        <div>
+          <div class="job-title">Business Development Officer, Accounts</div>
+          <div class="job-company">NICON Insurance Limited <span class="loc">— Abuja, Nigeria</span></div>
+          <ul>
+            <li>Built a custom Excel payroll package saving ₦15M in 2009 and ~₦6M annually since.</li>
+            <li>Automated Workers' Compensation accruals, cutting preparation time by 60 hours monthly.</li>
+            <li>Redesigned income tax reporting with state and federal boards, reducing potential liabilities by ₦20M.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">Ref. Education</span>
+      <h2 class="section-title reveal">Education</h2>
+    </div>
+    <div class="edu-list reveal">
+      <div class="edu-item">
+        <div><div class="edu-degree">Master of Science in Finance</div><div class="edu-school">Nasarawa State University, Keffi, Nigeria</div></div>
+      </div>
+      <div class="edu-item">
+        <div><div class="edu-degree">Bachelor of Science in Accounting</div><div class="edu-school">University of Abuja, Abuja, Nigeria</div></div>
+      </div>
+      <div class="edu-item">
+        <div><div class="edu-degree">Higher National Diploma, Banking &amp; Finance</div><div class="edu-school">Federal Polytechnic, Ede, Nigeria</div></div>
+      </div>
+      <div class="edu-item">
+        <div><div class="edu-degree">National Diploma, Banking &amp; Finance</div><div class="edu-school">Lagos State Polytechnic, Isolo, Nigeria</div></div>
+      </div>
+    </div>
+    <p class="edu-note">Evaluated by World Education Services (WES): Master's Degree, Bachelor's Degree (4 yrs), Diploma (3 yrs), Postgraduate Certificate (1 yr), and Diploma (2 yrs).</p>
+  </div>
+</section>
+
+<section id="credentials">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">Ref. Credentials</span>
+      <h2 class="section-title reveal">Certifications &amp; Training</h2>
+    </div>
+
+    <div class="tabs reveal">
+      <button class="tab-btn active" data-tab="certs">Professional Certifications</button>
+      <button class="tab-btn" data-tab="training">Continuing Education</button>
+    </div>
+
+    <div class="tab-panel active" id="certs">
+      <div class="cred-grid reveal">
+        <div class="cred-item"><span class="cred-name">Licensed Life Insurance Agent, Alberta (World Financial Group)</span><span class="cred-date mono">2026</span></div>
+        <div class="cred-item"><span class="cred-name">Fellow, Institute of Chartered Management Consultants</span><span class="cred-date mono">2023</span></div>
+        <div class="cred-item"><span class="cred-name">Fellow, Chartered Institute of Bankers of Nigeria (FCIB)</span><span class="cred-date mono">2022</span></div>
+        <div class="cred-item"><span class="cred-name">Nigerian Institute of Training &amp; Development (MITD)</span><span class="cred-date mono">2022</span></div>
+        <div class="cred-item"><span class="cred-name">Fellow, Institute of Chartered Accountants of Nigeria (FCA)</span><span class="cred-date mono">2022</span></div>
+        <div class="cred-item"><span class="cred-name">Chartered Professional Accountant (CPA), BC Canada</span><span class="cred-date mono">2020</span></div>
+        <div class="cred-item"><span class="cred-name">Certified General Accountant (CGA), BC Canada</span><span class="cred-date mono">2020</span></div>
+        <div class="cred-item"><span class="cred-name">Association of Chartered Certified Accountants (ACCA)</span><span class="cred-date mono">2020</span></div>
+        <div class="cred-item"><span class="cred-name">Associate, Chartered Institute of Bankers of Nigeria (ACIB)</span><span class="cred-date mono">2013</span></div>
+        <div class="cred-item"><span class="cred-name">Associate, Institute of Chartered Accountants of Nigeria (ACA)</span><span class="cred-date mono">2012</span></div>
+        <div class="cred-item"><span class="cred-name">Associate, Nigerian Institute of Management — Chartered (AMNIM)</span><span class="cred-date mono">2003</span></div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="training">
+      <div class="cred-grid reveal">
+        <div class="cred-item"><span class="cred-name">Work &amp; Workforce Management — Udemy</span><span class="cred-date mono">Dec 2024</span></div>
+        <div class="cred-item"><span class="cred-name">SAP HCM Payroll — Udemy</span><span class="cred-date mono">Dec 2024</span></div>
+        <div class="cred-item"><span class="cred-name">Effective Bookkeeping &amp; Payroll — Alison</span><span class="cred-date mono">Dec 2024</span></div>
+        <div class="cred-item"><span class="cred-name">Tax &amp; Administration in Canada — Alison</span><span class="cred-date mono">Nov 2024</span></div>
+        <div class="cred-item"><span class="cred-name">First Aid Training in the Workplace — Alison</span><span class="cred-date mono">Nov 2024</span></div>
+        <div class="cred-item"><span class="cred-name">Advanced Excel — CHM Tech Institute, UK</span><span class="cred-date mono">Aug 2024</span></div>
+        <div class="cred-item"><span class="cred-name">Best Practices for a Quicker Financial Close — DoviLearn</span><span class="cred-date mono">Oct 2020</span></div>
+        <div class="cred-item"><span class="cred-name">Capital Allocation &amp; Budgeting Masterclass — DoviLearn</span><span class="cred-date mono">Oct 2020</span></div>
+        <div class="cred-item"><span class="cred-name">Financial Modeling Using Excel — DoviLearn</span><span class="cred-date mono">Oct 2020</span></div>
+        <div class="cred-item"><span class="cred-name">Transform, Grow &amp; Innovate in Finance — DoviLearn</span><span class="cred-date mono">Oct 2020</span></div>
+        <div class="cred-item"><span class="cred-name">Powerful PowerPoint Presentations — DoviLearn</span><span class="cred-date mono">Oct 2020</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap two-col">
+    <div class="reveal">
+      <div class="section-head" style="margin-bottom:20px;">
+        <span class="section-tag">Ref. Research</span>
+        <h2 class="section-title" style="font-size:24px;">Publication</h2>
+      </div>
+      <div class="pub-box">
+        <p class="pub-cite">Aina, Hannah E. &amp; Jacob, Z. — "Effect of Financial Policies on Shareholders' Wealth of Quoted Insurance Companies in Nigeria." <em>International Journal of Economics, Business and Management Research</em>, 8.05 (2024): 1–13.</p>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="section-head" style="margin-bottom:20px;">
+        <span class="section-tag">Ref. Language</span>
+        <h2 class="section-title" style="font-size:24px;">Languages</h2>
+      </div>
+      <div class="lang-box">
+        <div class="lang-row"><span>English</span><span>Proficient</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-cta reveal">Books balance.<br>Let's talk numbers.</div>
+    <div class="footer-links reveal">
+      <a class="contact-chip" href="mailto:tokiaina@yahoo.com">tokiaina@yahoo.com</a>
+      <a class="contact-chip" href="tel:+14033937779">+1 403 393 7779</a>
+      <a class="contact-chip" href="https://www.linkedin.com/in/hannah-aina-23344974/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+    <div class="footer-fine">© 2026 AINA HANNAH · TABER, ALBERTA, CANADA</div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('show'); } });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Ledger rows stagger + balanced status
+  const ledgerCard = document.getElementById('ledger-card');
+  const ledgerRows = document.querySelectorAll('.ledger-row');
+  const ledgerStatus = document.getElementById('ledger-status');
+  let ledgerFired = false;
+  const ledgerIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting && !ledgerFired){
+        ledgerFired = true;
+        ledgerRows.forEach((row, i) => {
+          setTimeout(() => row.classList.add('show'), i * 120);
+        });
+        setTimeout(() => {
+          ledgerStatus.textContent = 'balanced ✓';
+          ledgerStatus.classList.add('balanced');
+        }, ledgerRows.length * 120 + 300);
+      }
+    });
+  }, { threshold: 0.3 });
+  if(ledgerCard) ledgerIO.observe(ledgerCard);
+
+  // Tabs
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabPanels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
